@@ -1,0 +1,4 @@
+CONNECT 'jdbc:derby:JHU;create=true';
+CREATE TABLE STUDENT ( FIRST_NAME varchar(40), LAST_NAME varchar(40) , SSN
+char(11) , EMAIL varchar(40), ADDRESS varchar(40), USERID varchar(8) ,
+PASSWORD varchar(8) );

@@ -1,0 +1,78 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import domain.StudentInfo;
+
+/**
+ * Servlet implementation class RegisterServlet
+ */
+public class RegisterServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public RegisterServlet() {
+        super();
+    }
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("RegisterServlet called.");
+
+		HttpSession session = request.getSession();
+		
+		String message = "";
+		
+		// get the StudentInfo object stored as a session variable
+		StudentInfo studentInfo;
+		if (session.getAttribute("studentInfo") == null) {
+			studentInfo = new StudentInfo();
+		} else {
+			studentInfo = (StudentInfo) session.getAttribute("studentInfo");
+		}
+		
+		String formName = (String) session.getAttribute("formName");
+		
+		if (formName.equals("registerA")) { // process form A
+			studentInfo.setUserId(request.getParameter("userId"));
+			studentInfo.setPassword(request.getParameter("password"));
+			studentInfo.setFirstName(request.getParameter("firstName"));
+			studentInfo.setLastName(request.getParameter("lastName"));
+			studentInfo.setSsn(request.getParameter("lastName"));
+			studentInfo.setEmail(request.getParameter("email"));
+
+			// store info from form A in session variable for later usage
+			session.setAttribute("studentInfo", studentInfo);
+			
+			message = "Form A saved.";
+		} else if (formName.equals("registerB")) { // process form B and do registration
+			String address = "";
+			address = request.getParameter("address");
+			address = address + " " + request.getParameter("city");
+			address = address + ", " + request.getParameter("state");
+			address = address + " " + request.getParameter("postalCode");
+			
+			studentInfo.setAddress(address);
+			
+			// store info from form b in session variable for later usage
+			session.setAttribute("studentInfo", studentInfo);
+			
+			// register the student
+			
+		}
+			
+		// return response to caller
+		request.setAttribute("message", message);
+		request.getRequestDispatcher("/registration.jsp").forward(request, response);
+	}
+}

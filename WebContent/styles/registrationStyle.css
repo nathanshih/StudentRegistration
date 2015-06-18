@@ -1,0 +1,29 @@
+body {
+    background-color: #3472d7;
+}
+
+.input label {
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 140px;
+    text-align: right;
+    padding: 5px;
+}
+
+.input input,select {
+	display: inline-block;
+	width: 200px;
+	float: left;
+	padding: 5px;
+}
+
+.input select {
+	width: 50px;
+}
+
+.button, p {
+	padding-top: 5px;
+	padding-left: 80px;
+	clear: both;
+}
