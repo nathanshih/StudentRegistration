@@ -85,7 +85,7 @@ public class LoginServlet extends HttpServlet {
 				String dataSourceName = (String) session.getAttribute("dataSourceName");
 				
 				StudentLoginViaDataSource studentLogin = new StudentLoginViaDataSource(userId, password, serverUrl, dataSourceName);
-				ResultSet rs = studentLogin.doLogin();
+				ResultSet rs = studentLogin.login();
 				try {
 					if (rs.next()) {	
 						String firstName = rs.getString("FIRST_NAME");

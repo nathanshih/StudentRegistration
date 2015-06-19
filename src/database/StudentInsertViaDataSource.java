@@ -2,42 +2,39 @@ package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Hashtable;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import domain.StudentInfo;
+
 /**
  * This class will use the DataSource object defined in WLS to obtain a connection to the 
- * JHU database to query the Student table given the userId and password.
+ * JHU database to insert into the Student table given a StudentInfo object.
  *
  * @author Nathan Shih
  * @since Jun 12, 2015
  */
-public class StudentLoginViaDataSource {
+public class StudentInsertViaDataSource {
 
 	private final static String JNDI_FACTORY = "weblogic.jndi.WLInitialContextFactory";
 	
 	private String serverUrl;
 	private String dataSourceName;
 	private Connection con;	
-	private String userId;
-	private String password;
-	private ResultSet rs;
+	private StudentInfo studentInfo;
 	
 	/**
-	 * Create the StudentLoginViaDataSource object with required parameters.
+	 * Create the StudentInsertViaDataSource object with required parameters.
 	 * 
-	 * @param userId the userId to login with
-	 * @param password the password associated with the userId
+	 * @param studentInfo the studentInfo object to insert
 	 * @param serverUrl the URL of the WLS server
 	 * @param dataSourceName the DataSourceName
 	 */
-	public StudentLoginViaDataSource(String userId, String password, String serverUrl, String dataSourceName) {
-		setUserId(userId);
-		setPassword(password);
+	public StudentInsertViaDataSource(StudentInfo studentInfo, String serverUrl, String dataSourceName) {
+		setStudentInfo(studentInfo);
 		setServerUrl(serverUrl);
 		setDataSourceName(dataSourceName);
 	}
@@ -46,7 +43,7 @@ public class StudentLoginViaDataSource {
 		return serverUrl;
 	}
 
-	public StudentLoginViaDataSource setServerUrl(String serverUrl) {
+	public StudentInsertViaDataSource setServerUrl(String serverUrl) {
 		this.serverUrl = serverUrl;
 		
 		return this;
@@ -56,34 +53,18 @@ public class StudentLoginViaDataSource {
 		return dataSourceName;
 	}
 
-	public StudentLoginViaDataSource setDataSourceName(String dataSourceName) {
+	public StudentInsertViaDataSource setDataSourceName(String dataSourceName) {
 		this.dataSourceName = dataSourceName;
 		
 		return this;
 	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public StudentLoginViaDataSource setUserId(String userId) {
-		this.userId = userId;
-		
-		return this;
-	}
-
-	public String getPassword() {
-		return password;
-	}
 	
-	public ResultSet getResultSet() {
-		return rs;
+	public StudentInfo getStudentInfo() {
+		return studentInfo;
 	}
 
-	public StudentLoginViaDataSource setPassword(String password) {
-		this.password = password;
-		
-		return this;
+	public void setStudentInfo(StudentInfo studentInfo) {
+		this.studentInfo = studentInfo;
 	}
 
 	/**
@@ -92,7 +73,7 @@ public class StudentLoginViaDataSource {
 	 * @return the ResultSet object containing any records found
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public ResultSet login() {
+	public int insert() {
 		InitialContext ic = null;
 		try {
 			Hashtable env = new Hashtable();
@@ -106,22 +87,30 @@ public class StudentLoginViaDataSource {
 			System.out.println("\n\n\t Unable To Get The InitialContext => "+e);
 		}
 
+		int rowCount = 0;
 		try {
 			// connecting to the data source
 			DataSource ds = (DataSource) ic.lookup(dataSourceName);
 			con = ds.getConnection();
 			
 			// querying the DB
-			String sqlQuery = "SELECT * FROM Student WHERE userid = '" + userId + "' and password = '" + password + "'";
+			String sqlQuery = "INSERT INTO Student VALUES (?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sqlQuery);
-			System.out.println("Executing query: " + sqlQuery);
-			rs = ps.executeQuery();
+			ps.setString(1, studentInfo.getFirstName());
+			ps.setString(2, studentInfo.getLastName());
+			ps.setString(3, studentInfo.getSsn());
+			ps.setString(4, studentInfo.getEmail());
+			ps.setString(5, studentInfo.getAddress());
+			ps.setString(6, studentInfo.getUserId());
+			ps.setString(7, studentInfo.getPassword());
+						
+			rowCount = ps.executeUpdate();
 		}
 		catch(Exception e) {
 			System.err.println("Exception: " + e.getMessage());
 		}
 		
-		return rs;
+		return rowCount;
 	}
 	
 	/**
