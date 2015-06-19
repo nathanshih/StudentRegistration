@@ -112,9 +112,10 @@ public class StudentLoginViaDataSource {
 			con = ds.getConnection();
 			
 			// querying the DB
-			String sqlQuery = "SELECT * FROM Student WHERE userid = '" + userId + "' and password = '" + password + "'";
+			String sqlQuery = "SELECT * FROM Student WHERE userid=? and password=?";
 			PreparedStatement ps = con.prepareStatement(sqlQuery);
-			System.out.println("Executing query: " + sqlQuery);
+			ps.setString(1, userId);
+			ps.setString(2, password);
 			rs = ps.executeQuery();
 		}
 		catch(Exception e) {

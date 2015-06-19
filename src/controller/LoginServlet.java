@@ -101,6 +101,7 @@ public class LoginServlet extends HttpServlet {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				} finally {
+					// close connection
 					studentLogin.closeConnection();
 				}
 			}

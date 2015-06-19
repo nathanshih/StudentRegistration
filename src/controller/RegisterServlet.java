@@ -78,7 +78,8 @@ public class RegisterServlet extends HttpServlet {
 			
 			// register the student
 			StudentInsertViaDataSource studentInsert = new StudentInsertViaDataSource(studentInfo, serverUrl, dataSourceName);
-			if (studentInsert.insert() == 1) {
+			int result = studentInsert.insert();
+			if (result > 0) {
 				message = "Welcome to the site, " + studentInfo.getFirstName() + " " + studentInfo.getLastName();
 				try {
 					Thread.sleep(4000);
@@ -90,6 +91,9 @@ public class RegisterServlet extends HttpServlet {
 			} else {
 				message = "Student not registered.";
 			}
+			
+			// close connection
+			studentInsert.closeConnection();
 		}
 			
 		// return response to caller
