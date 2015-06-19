@@ -72,6 +72,8 @@ public class CourseServlet extends HttpServlet {
 			}
 			
 			refreshCourseList(session);
+			
+			// close connection
 			registration.closeConnection();
 		}
 			
