@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import database.StudentInsertViaDataSource;
 import domain.StudentInfo;
 
 /**
@@ -30,7 +31,7 @@ public class RegisterServlet extends HttpServlet {
 		System.out.println("RegisterServlet called.");
 
 		HttpSession session = request.getSession();
-		
+
 		String message = "";
 		
 		// get the StudentInfo object stored as a session variable
@@ -40,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
 		} else {
 			studentInfo = (StudentInfo) session.getAttribute("studentInfo");
 		}
-		
+
 		String formName = (String) session.getAttribute("formName");
 		
 		if (formName.equals("registerA")) { // process form A
@@ -48,11 +49,13 @@ public class RegisterServlet extends HttpServlet {
 			studentInfo.setPassword(request.getParameter("password"));
 			studentInfo.setFirstName(request.getParameter("firstName"));
 			studentInfo.setLastName(request.getParameter("lastName"));
-			studentInfo.setSsn(request.getParameter("lastName"));
+			studentInfo.setSsn(request.getParameter("ssn"));
 			studentInfo.setEmail(request.getParameter("email"));
 
 			// store info from form A in session variable for later usage
 			session.setAttribute("studentInfo", studentInfo);
+			
+			System.out.println("Student info saved: " + studentInfo.toString());
 			
 			message = "Form A saved.";
 		} else if (formName.equals("registerB")) { // process form B and do registration
@@ -67,8 +70,19 @@ public class RegisterServlet extends HttpServlet {
 			// store info from form b in session variable for later usage
 			session.setAttribute("studentInfo", studentInfo);
 			
-			// register the student
+			// get the URL for WLS and DataSourceName from the session variable passed in from the RegistrationControllerServlet
+			String serverUrl = (String) session.getAttribute("serverUrl");
+			String dataSourceName = (String) session.getAttribute("dataSourceName");
 			
+			System.out.println("Student info to be registered: " + studentInfo.toString());
+			
+			// register the student
+			StudentInsertViaDataSource studentInsert = new StudentInsertViaDataSource(studentInfo, serverUrl, dataSourceName);
+			if (studentInsert.insert() == 1) {
+				message = "Student: " + studentInfo.getFirstName() + " " + studentInfo.getLastName() + " registered.";
+			} else {
+				message = "Student not registered.";
+			}
 		}
 			
 		// return response to caller
