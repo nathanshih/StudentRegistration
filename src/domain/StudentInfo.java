@@ -3,7 +3,7 @@ package domain;
 import java.io.Serializable;
 
 /**
- * StudentInfo object to bind to JNDI.
+ * Domain object for the student information.
  *
  * @author Nathan Shih
  * @since Jun 12, 2015
@@ -20,6 +20,10 @@ public class StudentInfo implements Serializable {
 	private String userId;
 	private String password;
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -74,10 +78,6 @@ public class StudentInfo implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	/**

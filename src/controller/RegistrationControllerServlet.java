@@ -77,12 +77,15 @@ public class RegistrationControllerServlet extends HttpServlet {
 		} else if (formName.equals("login")) { // dispatch to LoginServlet
 			rd = request.getRequestDispatcher("LoginServlet");
 		} else if (formName.equals("go")) {
-			rd = request.getRequestDispatcher("/courses.jsp");
 			if (request.getParameter("goRadio").equals("logout")) {
 				session.invalidate();
 				session = request.getSession();
 				rd = request.getRequestDispatcher("/login.jsp");
+			} else {
+				rd = request.getRequestDispatcher("/courses.jsp");
 			}
+		} else if (formName.equals("courseForm")) {
+			rd = request.getRequestDispatcher("CourseServlet");
 		} else { // dispatch back to same page
 			rd = request.getRequestDispatcher("/login.jsp");
 		}
