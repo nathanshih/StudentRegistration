@@ -18,7 +18,7 @@
         <input type="hidden" name="formName" value="courseForm">
         <div class="input">
             <label for="courses">Coures:</label>
-            <select name="coures">
+            <select name="courses">
 	            <c:forEach var="courseList" items="${courseList}">
 	                <option value="${courseList.courseId}">${courseList}</option>
 	            </c:forEach>

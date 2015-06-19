@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>StudentRegistration</display-name>
+  
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- RegistrationControllerServlet -->
   <servlet>
     <servlet-name>RegistrationControllerServlet</servlet-name>
     <servlet-class>controller.RegistrationControllerServlet</servlet-class>
@@ -20,6 +23,8 @@
     <servlet-name>RegistrationControllerServlet</servlet-name>
     <url-pattern>/RegistrationControllerServlet</url-pattern>
   </servlet-mapping>
+  
+  <!-- LoginServlet -->
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>controller.LoginServlet</servlet-class>
@@ -32,6 +37,8 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  
+  <!-- RegisterServlet -->
   <servlet>
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>controller.RegisterServlet</servlet-class>
@@ -40,9 +47,15 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  
+  <!-- CourseServlet -->
+  <servlet>
     <servlet-name>CourseServlet</servlet-name>
     <servlet-class>controller.CourseServlet</servlet-class>
+    <init-param>
+      <param-name>courseCapacity</param-name>
+      <param-value>3</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>CourseServlet</servlet-name>
