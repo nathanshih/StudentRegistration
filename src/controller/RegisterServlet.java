@@ -79,7 +79,14 @@ public class RegisterServlet extends HttpServlet {
 			// register the student
 			StudentInsertViaDataSource studentInsert = new StudentInsertViaDataSource(studentInfo, serverUrl, dataSourceName);
 			if (studentInsert.insert() == 1) {
-				message = "Student: " + studentInfo.getFirstName() + " " + studentInfo.getLastName() + " registered.";
+				message = "Welcome to the site, " + studentInfo.getFirstName() + " " + studentInfo.getLastName();
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
 			} else {
 				message = "Student not registered.";
 			}

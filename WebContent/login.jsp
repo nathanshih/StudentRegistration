@@ -26,6 +26,19 @@
 	</form>
 
 	<p>${message}</p>
+	
+	<h3>Select your next action:</h3>
+	
+	<form name=goForm method="post" action="RegistrationControllerServlet">
+        <input type="hidden" name="formName" value="go">
+        <label for="course">Register for course</label>
+        <input type="radio" name="goRadio" value="course" checked><br>
+        <label for="logout">Logout</label>
+        <input type="radio" name="goRadio" value="logout">
+        <div class="button">
+            <input type="submit" name="submit" value="Submit">
+        </div>
+	</form>
 
 	<h3>For new users, please register first</h3>
 
