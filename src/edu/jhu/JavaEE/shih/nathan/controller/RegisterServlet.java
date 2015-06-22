@@ -33,6 +33,7 @@ public class RegisterServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String message = "";
+		String forwardDestination = "";
 		
 		// get the StudentInfo object stored as a session variable
 		StudentInfo studentInfo;
@@ -58,6 +59,7 @@ public class RegisterServlet extends HttpServlet {
 			System.out.println("Student info saved: " + studentInfo.toString());
 			
 			message = "Form A saved.";
+			forwardDestination = "/registration.jsp";
 		} else if (formName.equals("registerB")) { // process form B and do registration
 			String address = "";
 			address = request.getParameter("address");
@@ -81,13 +83,9 @@ public class RegisterServlet extends HttpServlet {
 			int result = studentInsert.insert();
 			if (result > 0) {
 				message = "Welcome to the site, " + studentInfo.getFirstName() + " " + studentInfo.getLastName();
-				try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+
 				request.setAttribute("message", message);
-				request.getRequestDispatcher("/login.jsp").forward(request, response);
+				forwardDestination = "/login.jsp";
 			} else {
 				message = "Student not registered.";
 			}
@@ -98,6 +96,6 @@ public class RegisterServlet extends HttpServlet {
 			
 		// return response to caller
 		request.setAttribute("message", message);
-		request.getRequestDispatcher("/registration.jsp").forward(request, response);
+		request.getRequestDispatcher(forwardDestination).forward(request, response);
 	}
 }
