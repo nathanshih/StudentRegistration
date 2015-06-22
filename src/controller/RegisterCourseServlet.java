@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+
 import database.RegistrationViaDataSource;
 import domain.Course;
 
@@ -45,28 +47,38 @@ public class RegisterCourseServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String message = "";
-
-		// get the URL for WLS and DataSourceName from the session variable passed in from the RegistrationControllerServlet
-		String serverUrl = (String) session.getAttribute("serverUrl");
-		String dataSourceName = (String) session.getAttribute("dataSourceName");
+		String forwardDestination = "";
 		
-		// save courseid as a session variable for later use
-		Course course = (Course) session.getAttribute("course");
+		String action = request.getParameter("registerButton");
 		
-		// attempt registration
-		RegistrationViaDataSource registration = new RegistrationViaDataSource(course.getCourseId(), courseCapacity, serverUrl, dataSourceName);
-		int result = registration.registerCourse();
-		if (result > 0) {
-			message = "You have been registered to " + course.toString();
-		} else {
-			message = "Sorry, the registration to this course has been closed based on availability.";
+		if (StringUtils.containsIgnoreCase(action, "register")) {
+			// get the URL for WLS and DataSourceName from the session variable passed in from the RegistrationControllerServlet
+			String serverUrl = (String) session.getAttribute("serverUrl");
+			String dataSourceName = (String) session.getAttribute("dataSourceName");
+			
+			// save courseid as a session variable for later use
+			Course course = (Course) session.getAttribute("course");
+			
+			// attempt registration
+			RegistrationViaDataSource registration = new RegistrationViaDataSource(course.getCourseId(), courseCapacity, serverUrl, dataSourceName);
+			int result = registration.registerCourse();
+			if (result > 0) {
+				message = "You have been registered to " + course.toString();
+			} else {
+				message = "Sorry, the registration to this course has been closed based on availability.";
+			}
+			
+			// close connection
+			registration.closeConnection();
+			
+			forwardDestination = "/registrarcourse.jsp";
+		} else if (StringUtils.containsIgnoreCase(action, "cancel")) {
+			System.out.println("Canceling registration.");
+			forwardDestination = "/courses.jsp";
 		}
-		
-		// close connection
-		registration.closeConnection();
 			
 		// return response to caller
 		request.setAttribute("message", message);
-		request.getRequestDispatcher("/registrarcourse.jsp").forward(request, response);
+		request.getRequestDispatcher(forwardDestination).forward(request, response);
 	}
 }

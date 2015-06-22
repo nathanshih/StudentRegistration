@@ -17,8 +17,8 @@
         <input type="hidden" name="formName" value="registrarForm">
         Register for course ${course}?
         <div class="button">
-            <input type="submit" name="courseButton" value="Register">
-            <input type="button" name="cancel" value="Cancel" onclick="window.history.back();">
+            <input type="submit" name="registerButton" value="Register">
+            <input type="submit" name="registerButton" value="Cancel">
         </div>
     </form>
 
