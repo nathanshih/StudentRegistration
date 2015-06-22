@@ -87,8 +87,8 @@ public class CourseQueryViaDataSource {
 			while(rs.next()) {
 				Course course = new Course();
 				
-				course.setCourseId(rs.getInt("COURSEID"));
-				course.setCourseName(rs.getString("COURSE_NAME"));
+				course.setCourseId(rs.getInt("courseid"));
+				course.setCourseName(rs.getString("course_name"));
 				
 				System.out.println("Adding course: " + course.toString());
 				courses.add(course);
@@ -99,6 +99,52 @@ public class CourseQueryViaDataSource {
 		}
 		
 		return courses;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Course getCourseById(int courseId) {
+		
+		InitialContext ic = null;
+		try {
+			Hashtable env = new Hashtable();
+			env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
+			env.put(Context.PROVIDER_URL, serverUrl);
+			env.put(Context.SECURITY_PRINCIPAL,"nathanshih");
+			env.put(Context.SECURITY_CREDENTIALS,"password1");
+			ic = new InitialContext(env);
+		}
+		catch(Exception e) {
+			System.out.println("\n\n\t Unable To Get The InitialContext => "+e);
+		}
+
+		Course course = null;
+		try {
+			// connecting to the data source
+			DataSource ds = (DataSource) ic.lookup(dataSourceName);
+			con = ds.getConnection();
+			
+			// querying the DB
+			String sqlQuery = "SELECT * FROM Courses WHERE courseid=?";
+			PreparedStatement ps = con.prepareStatement(sqlQuery);
+			ps.setInt(1, courseId);
+			System.out.println("Querying Courses table for courseid " + courseId);
+			ResultSet rs = ps.executeQuery();
+			
+			// return results, if found otherwise null
+			if (rs.next()) {
+				course = new Course();
+				
+				course.setCourseId(rs.getInt("courseid"));
+				course.setCourseName(rs.getString("course_name"));
+				
+				System.out.println("Course found: " + course.toString());
+			}
+		}
+		catch(Exception e) {
+			System.err.println("Exception: " + e.getMessage());
+		}
+		
+		return course;
 	}
 	
 	/**

@@ -52,13 +52,23 @@
   <servlet>
     <servlet-name>CourseServlet</servlet-name>
     <servlet-class>controller.CourseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CourseServlet</servlet-name>
+    <url-pattern>/CourseServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- RegisterCourseServlet -->
+  <servlet>
+    <servlet-name>RegisterCourseServlet</servlet-name>
+    <servlet-class>controller.RegisterCourseServlet</servlet-class>
     <init-param>
       <param-name>courseCapacity</param-name>
       <param-value>3</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CourseServlet</servlet-name>
-    <url-pattern>/CourseServlet</url-pattern>
+    <servlet-name>RegisterCourseServlet</servlet-name>
+    <url-pattern>/RegisterCourseServlet</url-pattern>
   </servlet-mapping>
 </web-app>
