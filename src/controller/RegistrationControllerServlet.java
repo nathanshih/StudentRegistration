@@ -86,6 +86,8 @@ public class RegistrationControllerServlet extends HttpServlet {
 			}
 		} else if (formName.equals("courseForm")) {
 			rd = request.getRequestDispatcher("CourseServlet");
+		} else if (formName.equals("registrarForm")) {
+			rd = request.getRequestDispatcher("RegisterCourseServlet");
 		} else { // dispatch back to same page
 			rd = request.getRequestDispatcher("/login.jsp");
 		}
