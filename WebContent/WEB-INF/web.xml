@@ -9,7 +9,7 @@
   <!-- RegistrationControllerServlet -->
   <servlet>
     <servlet-name>RegistrationControllerServlet</servlet-name>
-    <servlet-class>controller.RegistrationControllerServlet</servlet-class>
+    <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegistrationControllerServlet</servlet-class>
     <init-param>
       <param-name>serverUrl</param-name>
       <param-value>t3://localhost:7001</param-value>
@@ -27,7 +27,7 @@
   <!-- LoginServlet -->
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>controller.LoginServlet</servlet-class>
+    <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.LoginServlet</servlet-class>
     <init-param>
       <param-name>loginAttemptsAllowed</param-name>
       <param-value>3</param-value>
@@ -41,7 +41,7 @@
   <!-- RegisterServlet -->
   <servlet>
     <servlet-name>RegisterServlet</servlet-name>
-    <servlet-class>controller.RegisterServlet</servlet-class>
+    <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegisterServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
@@ -51,7 +51,7 @@
   <!-- CourseServlet -->
   <servlet>
     <servlet-name>CourseServlet</servlet-name>
-    <servlet-class>controller.CourseServlet</servlet-class>
+    <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.CourseServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CourseServlet</servlet-name>
@@ -61,7 +61,7 @@
   <!-- RegisterCourseServlet -->
   <servlet>
     <servlet-name>RegisterCourseServlet</servlet-name>
-    <servlet-class>controller.RegisterCourseServlet</servlet-class>
+    <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegisterCourseServlet</servlet-class>
     <init-param>
       <param-name>courseCapacity</param-name>
       <param-value>3</param-value>

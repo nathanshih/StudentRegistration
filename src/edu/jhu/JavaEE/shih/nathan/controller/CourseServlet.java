@@ -1,4 +1,4 @@
-package controller;
+package edu.jhu.JavaEE.shih.nathan.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 
-import database.CourseQueryViaDataSource;
-import domain.Course;
+import edu.jhu.JavaEE.shih.nathan.dao.CourseQueryViaDataSource;
+import edu.jhu.JavaEE.shih.nathan.domain.Course;
 
 /**
  * Servlet implementation class CourseServlet

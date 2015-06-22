@@ -1,4 +1,4 @@
-package controller;
+package edu.jhu.JavaEE.shih.nathan.controller;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 
-import database.StudentLoginViaDataSource;
+import edu.jhu.JavaEE.shih.nathan.dao.StudentLoginViaDataSource;
 
 /**
  * Servlet implementation class LoginServlet

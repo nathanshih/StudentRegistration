@@ -1,4 +1,4 @@
-package database;
+package edu.jhu.JavaEE.shih.nathan.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import domain.StudentInfo;
+import edu.jhu.JavaEE.shih.nathan.domain.StudentInfo;
 
 /**
  * This class will use the DataSource object defined in WLS to obtain a connection to the 

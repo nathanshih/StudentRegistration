@@ -1,4 +1,4 @@
-package database;
+package edu.jhu.JavaEE.shih.nathan.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

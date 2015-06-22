@@ -1,4 +1,4 @@
-package controller;
+package edu.jhu.JavaEE.shih.nathan.controller;
 
 import java.io.IOException;
 
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 
-import database.RegistrationViaDataSource;
-import domain.Course;
+import edu.jhu.JavaEE.shih.nathan.dao.RegistrationViaDataSource;
+import edu.jhu.JavaEE.shih.nathan.domain.Course;
 
 /**
  * Servlet implementation class RegisterCourseServlet

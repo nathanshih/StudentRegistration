@@ -1,4 +1,4 @@
-package controller;
+package edu.jhu.JavaEE.shih.nathan.controller;
 
 import java.io.IOException;
 
