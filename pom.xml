@@ -15,6 +15,7 @@
     <build>
         <finalName>StudentRegistration</finalName>
         <sourceDirectory>src</sourceDirectory>
+        <outputDirectory>WebContent/WEB-INF/classes</outputDirectory>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

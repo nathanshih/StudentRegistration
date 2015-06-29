@@ -1,2 +1,5 @@
 # Derby
 /database/*
+
+# Compiled classes
+WebContent/WEB-INF/classes/*
