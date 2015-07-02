@@ -11,7 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import edu.jhu.JavaEE.shih.nathan.domain.Course;
+import edu.jhu.JavaEE.shih.nathan.beans.Course;
 
 /**
  * This class will use the DataSource object defined in WLS to obtain a connection to the 

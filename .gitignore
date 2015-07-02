@@ -3,3 +3,4 @@
 
 # Compiled classes
 WebContent/WEB-INF/classes/*
+/target/

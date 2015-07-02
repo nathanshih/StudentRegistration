@@ -6,7 +6,7 @@
     <display-name>StudentRegistration</display-name>
 
     <welcome-file-list>
-        <welcome-file>faces/login.xhtml</welcome-file>
+        <welcome-file>login.xhtml</welcome-file>
     </welcome-file-list>
 
     <context-param>
@@ -22,7 +22,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>RegistrationControllerServlet</servlet-name>

@@ -27,8 +27,8 @@
             <br />
 		</div>
 		<div class="button">
-			<input type="submit" name="login" value="Login" /> <input
-				type="reset" value="Reset" />
+			<h:commandButton action="#{login.validateUsernamePassword}" value="Login"></h:commandButton>
+			<input type="reset" value="Reset" />
 		</div>
 	</h:form>
 
@@ -36,10 +36,10 @@
 	
 	<h3>Select your next action:</h3>
 	
-	<h:form name=goForm method="post" action="RegistrationControllerServlet">
+	<h:form name="goForm">
         <input type="hidden" name="formName" value="go"/>
         <label for="course">Register for course</label>
-        <input type="radio" name="goRadio" value="course" checked/><br/>
+        <input type="radio" name="goRadio" value="course"/><br/>
         <label for="logout">Logout</label>
         <input type="radio" name="goRadio" value="logout"/>
         <div class="button">
