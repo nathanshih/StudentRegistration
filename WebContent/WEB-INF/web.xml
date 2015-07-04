@@ -9,10 +9,23 @@
         <welcome-file>login.xhtml</welcome-file>
     </welcome-file-list>
 
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
+	<!-- Context parameters -->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<context-param>
+		<param-name>serverUrl</param-name>
+		<param-value>t3://localhost:7001</param-value>
+	</context-param>
+	<context-param>
+		<param-name>dataSourceName</param-name>
+		<param-value>jhuDataSource</param-value>
+	</context-param>
+	<context-param>
+		<param-name>loginAttemptsAllowed</param-name>
+		<param-value>3</param-value>
+	</context-param>
 
     <!-- RegistrationControllerServlet -->
     <servlet>
@@ -27,14 +40,6 @@
     <servlet>
         <servlet-name>RegistrationControllerServlet</servlet-name>
         <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegistrationControllerServlet</servlet-class>
-        <init-param>
-            <param-name>serverUrl</param-name>
-            <param-value>t3://localhost:7001</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dataSourceName</param-name>
-            <param-value>jhuDataSource</param-value>
-        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationControllerServlet</servlet-name>
@@ -45,10 +50,6 @@
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.LoginServlet</servlet-class>
-        <init-param>
-            <param-name>loginAttemptsAllowed</param-name>
-            <param-value>3</param-value>
-        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>

@@ -1,58 +1,68 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Student Registration Site</title>
-    <h:outputStylesheet library="css" name="loginStyle.css"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Student Registration Site</title>
+	<h:outputStylesheet library="css" name="loginStyle.css" />
 </h:head>
 <h:body>
-    
+
 	<h1>Welcome to the Student Registration Site</h1>
 
-	<h:form name="loginForm">
+	<h:form id="loginForm">
+	
 		<h3>If you already have an account, please login</h3>
-		<input type="hidden" name="formName" value="login" />
-		<div class="input">
+
+		<div class="input">	
 			<h:outputText value="UserId" />
-			<h:inputText id="userId" value="#{login.userId}"></h:inputText>
-			<h:message for="userId"></h:message>
-            <br />
-            <br />
-            
-            <h:outputText value="Password" />
-            <h:inputText id="password" value="#{login.password}"></h:inputText>
-            <h:message for="password"></h:message>
-            <br />
-            <br />
+			<h:inputText id="userId" value="#{login.userId}" size="8" label="UserId">
+				<f:validator validatorId="edu.jhu.JavaEE.shih.nathan.validators.FieldValidator" />
+			</h:inputText>
+			<br /> <br />
+
+			<h:outputText value="Password" />
+			<h:inputText id="password" value="#{login.password}" size="8" label="Password">
+				<f:validator validatorId="edu.jhu.JavaEE.shih.nathan.validators.FieldValidator" />
+			</h:inputText>
+			<br /> <br />
 		</div>
+		
 		<div class="button">
-			<h:commandButton action="#{login.validateUsernamePassword}" value="Login"></h:commandButton>
-			<input type="reset" value="Reset" />
+			<h:commandButton action="#{login.validateUsernamePassword}" value="Login" />
+			<h:commandButton value="Reset">
+			</h:commandButton>
 		</div>
+		
+		<br />
+		
+		<h:message for="messages" id="messages" />
 	</h:form>
 
-	<p>${message}</p>
-	
 	<h3>Select your next action:</h3>
-	
+
 	<h:form name="goForm">
-        <input type="hidden" name="formName" value="go"/>
-        <label for="course">Register for course</label>
-        <input type="radio" name="goRadio" value="course"/><br/>
-        <label for="logout">Logout</label>
-        <input type="radio" name="goRadio" value="logout"/>
-        <div class="button">
-            <input type="submit" name="submit" value="Submit"/>
-        </div>
+		<input type="hidden" name="formName" value="go" />
+		<label for="course">Register for course</label>
+		<input type="radio" name="goRadio" value="course" />
+		<br />
+		<label for="logout">Logout</label>
+		<input type="radio" name="goRadio" value="logout" />
+		<div class="button">
+			<input type="submit" name="submit" value="Submit" />
+		</div>
 	</h:form>
 
 	<h3>For new users, please register first</h3>
 
-	<h:form name="registerForm" method="post" action="RegistrationControllerServlet">
-        <input type="hidden" name="formName" value="register"/>
+	<h:form name="registerForm" method="post"
+		action="RegistrationControllerServlet">
+		<input type="hidden" name="formName" value="register" />
 		<div class="button">
-			<input type="submit" name="register" value="Register"/>
+			<input type="submit" name="register" value="Register" />
 		</div>
 	</h:form>
 
