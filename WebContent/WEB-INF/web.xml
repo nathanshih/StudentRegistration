@@ -1,74 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>StudentRegistration</display-name>
-  
-  <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <!-- RegistrationControllerServlet -->
-  <servlet>
-    <servlet-name>RegistrationControllerServlet</servlet-name>
-    <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegistrationControllerServlet</servlet-class>
-    <init-param>
-      <param-name>serverUrl</param-name>
-      <param-value>t3://localhost:7001</param-value>
-    </init-param>
-    <init-param>
-      <param-name>dataSourceName</param-name>
-      <param-value>jhuDataSource</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegistrationControllerServlet</servlet-name>
-    <url-pattern>/RegistrationControllerServlet</url-pattern>
-  </servlet-mapping>
-  
-  <!-- LoginServlet -->
-  <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.LoginServlet</servlet-class>
-    <init-param>
-      <param-name>loginAttemptsAllowed</param-name>
-      <param-value>3</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
-  </servlet-mapping>
-  
-  <!-- RegisterServlet -->
-  <servlet>
-    <servlet-name>RegisterServlet</servlet-name>
-    <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegisterServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegisterServlet</servlet-name>
-    <url-pattern>/RegisterServlet</url-pattern>
-  </servlet-mapping>
-  
-  <!-- CourseServlet -->
-  <servlet>
-    <servlet-name>CourseServlet</servlet-name>
-    <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.CourseServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CourseServlet</servlet-name>
-    <url-pattern>/CourseServlet</url-pattern>
-  </servlet-mapping>
-  
-  <!-- RegisterCourseServlet -->
-  <servlet>
-    <servlet-name>RegisterCourseServlet</servlet-name>
-    <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegisterCourseServlet</servlet-class>
-    <init-param>
-      <param-name>courseCapacity</param-name>
-      <param-value>3</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegisterCourseServlet</servlet-name>
-    <url-pattern>/RegisterCourseServlet</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    id="WebApp_ID" version="3.0">
+    <display-name>StudentRegistration</display-name>
+
+    <welcome-file-list>
+        <welcome-file>login.xhtml</welcome-file>
+    </welcome-file-list>
+
+	<!-- Context parameters -->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<context-param>
+		<param-name>serverUrl</param-name>
+		<param-value>t3://localhost:7001</param-value>
+	</context-param>
+	<context-param>
+		<param-name>dataSourceName</param-name>
+		<param-value>jhuDataSource</param-value>
+	</context-param>
+	<context-param>
+		<param-name>loginAttemptsAllowed</param-name>
+		<param-value>3</param-value>
+	</context-param>
+
+	<!-- JSF FacesServlet -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    
+    <!-- RegistrationControllerServlet -->
+    <servlet>
+        <servlet-name>RegistrationControllerServlet</servlet-name>
+        <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegistrationControllerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegistrationControllerServlet</servlet-name>
+        <url-pattern>/RegistrationControllerServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- LoginServlet -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- RegisterServlet -->
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- CourseServlet -->
+    <servlet>
+        <servlet-name>CourseServlet</servlet-name>
+        <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.CourseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseServlet</servlet-name>
+        <url-pattern>/CourseServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- RegisterCourseServlet -->
+    <servlet>
+        <servlet-name>RegisterCourseServlet</servlet-name>
+        <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegisterCourseServlet</servlet-class>
+        <init-param>
+            <param-name>courseCapacity</param-name>
+            <param-value>3</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterCourseServlet</servlet-name>
+        <url-pattern>/RegisterCourseServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -8,7 +8,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import edu.jhu.JavaEE.shih.nathan.domain.StudentInfo;
+import edu.jhu.JavaEE.shih.nathan.beans.StudentInfo;
 
 /**
  * This class will use the DataSource object defined in WLS to obtain a connection to the 

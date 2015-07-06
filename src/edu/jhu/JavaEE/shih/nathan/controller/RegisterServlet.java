@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.jhu.JavaEE.shih.nathan.beans.StudentInfo;
 import edu.jhu.JavaEE.shih.nathan.dao.StudentInsertViaDataSource;
-import edu.jhu.JavaEE.shih.nathan.domain.StudentInfo;
 
 /**
  * Servlet implementation class RegisterServlet

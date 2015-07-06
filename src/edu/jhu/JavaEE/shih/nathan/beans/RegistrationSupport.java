@@ -1,4 +1,4 @@
-package edu.jhu.JavaEE.shih.nathan.domain;
+package edu.jhu.JavaEE.shih.nathan.beans;
 
 import java.io.Serializable;
 

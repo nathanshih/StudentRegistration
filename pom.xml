@@ -11,6 +11,8 @@
         <servlet-api.version>3.1.0</servlet-api.version>
         <jstl.version>1.2</jstl.version>
         <commons-lang3.version>3.4</commons-lang3.version>
+        <jsf-api.version>2.2.11</jsf-api.version>
+        <jsf-impl.version>2.2.11</jsf-impl.version>
     </properties>
 
     <build>
@@ -22,8 +24,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -58,5 +60,15 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang3.version}</version>
 		</dependency>
+<!-- 		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>${jsf-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>${jsf-impl.version}</version>
+		</dependency> -->
 	</dependencies>
 </project>
