@@ -8,7 +8,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import javax.servlet.http.HttpSession;
 
 import edu.jhu.JavaEE.shih.nathan.dao.StudentLoginViaDataSource;
@@ -48,18 +47,17 @@ public class Login implements Serializable {
 		// get or set current login attempt via session variable
         int loginAttempt;
         if (session.getAttribute("loginAttempt") == null) {
-            session.setAttribute("loginAttempt", 1);
-            loginAttempt = 1;
+        	loginAttempt = 1;
+            session.setAttribute("loginAttempt", loginAttempt);            
         } else {
             loginAttempt = (int) session.getAttribute("loginAttempt");        
         }
         
         // check if loginAttempsAllowed has been exceeded
-        if (loginAttempt >= SessionBean.getLoginAttemptsAllowed()) {
+        if (loginAttempt > SessionBean.getLoginAttemptsAllowed()) {
         	session.invalidate();
         	
         	facesMessage = new FacesMessage(FacesMessage.SEVERITY_WARN, "Max number of login attempts exceeded.", null);
-        	throw new ValidatorException(facesMessage);
         } else {
         	
         	// increment loginAttempts and set as session variable

@@ -27,7 +27,7 @@
 		<param-value>3</param-value>
 	</context-param>
 
-    <!-- RegistrationControllerServlet -->
+	<!-- JSF FacesServlet -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -37,6 +37,8 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+    <!-- RegistrationControllerServlet -->
     <servlet>
         <servlet-name>RegistrationControllerServlet</servlet-name>
         <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegistrationControllerServlet</servlet-class>

@@ -25,7 +25,7 @@ public class FieldValidator implements Validator {
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object value)
 			throws ValidatorException {
-		
+
 		if (!validateFieldValue(value.toString())) {
 			
 			FacesMessage facesMessage = null;
