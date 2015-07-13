@@ -7,8 +7,6 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * This custom validator class uses JSF to verify whether the userId or password meets theses requirements:
  * <ol>
@@ -48,8 +46,13 @@ public class FieldValidator implements Validator {
 
 	private boolean validateFieldValue(String value) {
 	
-		// value cannot be empty or null
-		if (StringUtils.isEmpty(value)) {
+		// value cannot be null
+		if (value == null) {
+			return false;
+		}
+		
+		// value cannot be empty
+		if (value.isEmpty()) {
 			return false;
 		}
 		

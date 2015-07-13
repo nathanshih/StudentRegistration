@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
-
 import edu.jhu.JavaEE.shih.nathan.beans.Course;
 import edu.jhu.JavaEE.shih.nathan.dao.CourseQueryViaDataSource;
 
@@ -40,12 +38,12 @@ public class CourseServlet extends HttpServlet {
 		
 		String action = request.getParameter("courseButton");
 		
-		if (StringUtils.containsIgnoreCase(action, "refresh")) {
+		if (action.toLowerCase().contains("refresh")) {
 			refreshCourseList(session);
 			
 			message = "Refreshing course list.";
 			forwardDestination = "/courses.jsp";
-		} else if (StringUtils.containsIgnoreCase(action, "register")) {
+		} else if (action.toLowerCase().contains("register")) {
 			
 			// get the courseid from the request
 			int courseId = Integer.parseInt(request.getParameter("courses"));

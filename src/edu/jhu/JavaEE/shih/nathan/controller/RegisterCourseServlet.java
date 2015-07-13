@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
-
 import edu.jhu.JavaEE.shih.nathan.beans.Course;
 import edu.jhu.JavaEE.shih.nathan.dao.RegistrationViaDataSource;
 
@@ -51,7 +49,7 @@ public class RegisterCourseServlet extends HttpServlet {
 		
 		String action = request.getParameter("registerButton");
 		
-		if (StringUtils.containsIgnoreCase(action, "register")) {
+		if (action.toLowerCase().contains("register")) {
 			// get the URL for WLS and DataSourceName from the session variable passed in from the RegistrationControllerServlet
 			String serverUrl = (String) session.getAttribute("serverUrl");
 			String dataSourceName = (String) session.getAttribute("dataSourceName");
@@ -72,7 +70,7 @@ public class RegisterCourseServlet extends HttpServlet {
 			registration.closeConnection();
 			
 			forwardDestination = "/registrarcourse.jsp";
-		} else if (StringUtils.containsIgnoreCase(action, "cancel")) {
+		} else if (action.toLowerCase().contains("cancel")) {
 			System.out.println("Canceling registration.");
 			forwardDestination = "/courses.jsp";
 		}

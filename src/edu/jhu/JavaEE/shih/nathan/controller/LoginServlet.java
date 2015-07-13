@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
-
 import edu.jhu.JavaEE.shih.nathan.dao.StudentLoginViaDataSource;
 
 /**
@@ -126,8 +124,13 @@ public class LoginServlet extends HttpServlet {
 	 */
 	private boolean validateFieldValue(String value) {
 		
-		// value cannot be empty or null
-		if (StringUtils.isEmpty(value)) {
+		// value cannot be null
+		if (value == null) {
+			return false;
+		}
+		
+		// value cannot be empty
+		if (value.isEmpty()) {
 			return false;
 		}
 		
