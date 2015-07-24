@@ -39,14 +39,22 @@
     </servlet-mapping>
     
     <!-- RegistrationControllerServlet -->
-    <servlet>
-        <servlet-name>RegistrationControllerServlet</servlet-name>
-        <servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegistrationControllerServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RegistrationControllerServlet</servlet-name>
-        <url-pattern>/RegistrationControllerServlet</url-pattern>
-    </servlet-mapping>
+	<servlet>
+		<servlet-name>RegistrationControllerServlet</servlet-name>
+		<servlet-class>edu.jhu.JavaEE.shih.nathan.controller.RegistrationControllerServlet</servlet-class>
+		<init-param>
+			<param-name>serverUrl</param-name>
+			<param-value>t3://localhost:7001</param-value>
+		</init-param>
+		<init-param>
+			<param-name>dataSourceName</param-name>
+			<param-value>jhuDataSource</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegistrationControllerServlet</servlet-name>
+		<url-pattern>/RegistrationControllerServlet</url-pattern>
+	</servlet-mapping>
 
     <!-- LoginServlet -->
     <servlet>

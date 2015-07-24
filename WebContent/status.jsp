@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +12,22 @@
         
     <form name="statusForm" method="get" action="RegistrationControllerServlet">
         <input type="hidden" name="formName" value="statusForm">
-        <input type="text" name="courseId" value="Course Id">
+        <input type="text" name="courseId">
         <div class="button">
             <input type="submit" name="courseStatus" value="Get course status">
         </div>
     </form>
 
-    <p>${message}</p>
+	<br>
+	
+	<table>
+		<tr>
+			<th>Course ID</th>
+			<th>Course Name</th>
+			<th>Number of students registered</th>
+		</tr>
+		${message}
+	</table>
 
 </body>
 </html>

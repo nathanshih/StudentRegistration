@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.jhu.JavaEE.shih.nathan.beans.Status;
+
 /**
  * Servlet implementation class RegistrationControllerServlet
  */
@@ -87,7 +89,7 @@ public class RegistrationControllerServlet extends HttpServlet {
 		} else if (formName.equals("courseForm")) {
 			rd = request.getRequestDispatcher("CourseServlet");
 		} else if (formName.equals("registrarForm")) {
-			rd = request.getRequestDispatcher("RegisterCourseServlet");
+			rd = request.getRequestDispatcher("RegisterCourseServlet");		
 		} else { // dispatch back to same page
 			rd = request.getRequestDispatcher("/login.jsp");
 		}
@@ -96,5 +98,32 @@ public class RegistrationControllerServlet extends HttpServlet {
 		session.setAttribute("formName", formName);
 		
 		rd.forward(request, response);
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("RegistrationControllerServlet doGet() called.");
+		
+		// per requirements, set the URL to connect to WLS and the DataSource name as session variables
+		HttpSession session = request.getSession();
+		if (session.getAttribute("serverUrl") == null) {
+			session.setAttribute("serverUrl", serverUrl);
+		}
+		if (session.getAttribute("dataSourceName") == null) {
+			session.setAttribute("dataSourceName", dataSourceName);
+		}
+			
+		Status status = new Status(serverUrl, dataSourceName);
+		String message;
+		
+		String courseId = request.getParameter("courseId");
+		if (courseId == null || courseId.isEmpty()) {
+			message = status.getAllStatus();
+		} else {
+			message = status.getStatus(Integer.valueOf(courseId));
+		}
+		
+		session.setAttribute("message", message);
+		
+		request.getRequestDispatcher("/status.jsp").forward(request, response);
 	}
 }

@@ -23,3 +23,16 @@ body {
     padding-left: 20px;
     clear: both;
 }
+
+table, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+	width: auto;
+}
+
+th {
+    text-align: left;
+}
