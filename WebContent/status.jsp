@@ -20,14 +20,7 @@
 
 	<br>
 	
-	<table>
-		<tr>
-			<th>Course ID</th>
-			<th>Course Name</th>
-			<th>Number of students registered</th>
-		</tr>
-		${message}
-	</table>
+	${message}
 
 </body>
 </html>

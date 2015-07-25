@@ -119,7 +119,12 @@ public class RegistrationControllerServlet extends HttpServlet {
 		if (courseId == null || courseId.isEmpty()) {
 			message = status.getAllStatus();
 		} else {
-			message = status.getStatus(Integer.valueOf(courseId));
+			try {
+				message = status.getStatus(Integer.valueOf(courseId));
+			} catch (NumberFormatException nfe) {
+				System.err.println("You must enter a number.");
+				message = "You must enter a number.";
+			}
 		}
 		
 		session.setAttribute("message", message);

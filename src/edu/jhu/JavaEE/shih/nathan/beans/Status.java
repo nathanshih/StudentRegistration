@@ -17,6 +17,7 @@ public class Status {
 
 	private String serverUrl;
 	private String dataSourceName;
+	private String result;
 	
 	public Status() {
 		
@@ -27,6 +28,8 @@ public class Status {
 		
 		setServerUrl(serverUrl);
 		setDataSourceName(dataSourceName);
+		
+		setResult("<table><tr><th>Course ID</th><th>Course Name</th><th>Number of students registered</th></tr>");
 	}
 	
 	public String getServerUrl() {
@@ -45,19 +48,35 @@ public class Status {
 		this.dataSourceName = dataSourceName;
 	}
 
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
 	public String getStatus(int courseId) {
 		
 		CourseQueryViaDataSource courseQuery = new CourseQueryViaDataSource(serverUrl, dataSourceName);
 		RegistrationViaDataSource registrarQuery = new RegistrationViaDataSource(courseId, serverUrl, dataSourceName);
 		
 		Course course = courseQuery.getCourseById(courseId);
-		int numRegisteredStudents = registrarQuery.getNumberRegisteredStudents(courseId);
+		if (course != null) {
+			int numRegisteredStudents = registrarQuery.getNumberRegisteredStudents(courseId);
+			
+			result = result + "<tr>";
+			result = result + "<td>" + String.valueOf(course.getCourseId()) + "</td>";
+			result = result + "<td>" + course.getCourseName() + "</td>";
+			result = result + "<td>" + String.valueOf(numRegisteredStudents) + "</td>";
+			result = result + "</tr>";
+			result = result + "</table>";
+		} else {
+			result = "Course not found.";
+		}
 		
-		String result = "<tr>";
-		result = result + "<td>" + String.valueOf(course.getCourseId()) + "</td>";
-		result = result + "<td>" + course.getCourseName() + "</td>";
-		result = result + "<td>" + String.valueOf(numRegisteredStudents) + "</td>";
-		result = result + "</tr>";
+		courseQuery.closeConnection();
+		registrarQuery.closeConnection();
 		
 		return result;
 	}
@@ -69,7 +88,6 @@ public class Status {
 		
 		List<Course> courses = courseQuery.getAllCourses();
 		
-		String result = "";
 		for (Course course : courses) {
 			int numRegisteredStudents = registrarQuery.getNumberRegisteredStudents(course.getCourseId());
 			
@@ -77,8 +95,12 @@ public class Status {
 			result = result + "<td>" + String.valueOf(course.getCourseId()) + "</td>";
 			result = result + "<td>" + course.getCourseName() + "</td>";
 			result = result + "<td>" + String.valueOf(numRegisteredStudents) + "</td>";
-			result = result + "</tr>";
+			result = result + "</tr>";	
 		}
+		result = result + "</table>";
+		
+		courseQuery.closeConnection();
+		registrarQuery.closeConnection();
 		
 		return result;
 	}
