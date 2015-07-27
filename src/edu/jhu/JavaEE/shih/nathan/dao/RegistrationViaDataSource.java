@@ -25,6 +25,14 @@ public class RegistrationViaDataSource {
 	private int courseId;
 	private int courseCapacity;
 
+	public RegistrationViaDataSource(String serverUrl, String dataSourceName) {
+		this(0, serverUrl, dataSourceName);
+	}
+	
+	public RegistrationViaDataSource(int courseId, String serverUrl, String dataSourceName) {
+		this(courseId, 0, serverUrl, dataSourceName);
+	}
+	
 	public RegistrationViaDataSource(int courseId, int courseCapacity, String serverUrl, String dataSourceName) {
 		setCourseId(courseId);
 		setCourseCapacity(courseCapacity);
@@ -129,6 +137,47 @@ public class RegistrationViaDataSource {
 		}
 		
 		return 0;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public int getNumberRegisteredStudents(int courseId) {
+				
+		InitialContext ic = null;
+		try {
+			Hashtable env = new Hashtable();
+			env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
+			env.put(Context.PROVIDER_URL, serverUrl);
+			env.put(Context.SECURITY_PRINCIPAL,"nathanshih");
+			env.put(Context.SECURITY_CREDENTIALS,"password1");
+			ic = new InitialContext(env);
+		}
+		catch(Exception e) {
+			System.out.println("\n\n\t Unable To Get The InitialContext => "+e);
+		}
+
+		int numberStudentsRegistered = 0;
+		
+		try {
+			// connecting to the data source
+			DataSource ds = (DataSource) ic.lookup(dataSourceName);
+			con = ds.getConnection();
+			
+			// check if courseId already exists
+			String sqlQuery = "SELECT number_students_registered FROM Registrar WHERE courseid=?";
+			PreparedStatement ps = con.prepareStatement(sqlQuery);
+			ps.setInt(1, courseId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				// record found
+				numberStudentsRegistered = rs.getInt("number_students_registered");	
+				System.out.println("Registrar record found, number of students currently registered: " + numberStudentsRegistered);
+			}
+		}
+		catch(Exception e) {
+			System.err.println("Exception: " + e.getMessage());
+		}
+		
+		return numberStudentsRegistered;
 	}
 	
 	/**
