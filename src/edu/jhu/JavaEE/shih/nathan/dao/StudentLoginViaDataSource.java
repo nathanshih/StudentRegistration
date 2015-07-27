@@ -98,8 +98,6 @@ public class StudentLoginViaDataSource {
 			Hashtable env = new Hashtable();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
 			env.put(Context.PROVIDER_URL, serverUrl);
-			env.put(Context.SECURITY_PRINCIPAL,"nathanshih");
-			env.put(Context.SECURITY_CREDENTIALS,"password1");
 			ic = new InitialContext(env);
 		}
 		catch(Exception e) {
