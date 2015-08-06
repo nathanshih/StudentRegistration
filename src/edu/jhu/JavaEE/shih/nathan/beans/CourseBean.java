@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * This is the persistent class for the COURSE database table.
@@ -11,6 +13,7 @@ import javax.persistence.Entity;
  * @author Nathan
  */
 @Entity
+@Table(name = "COURSES")
 public class CourseBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -22,6 +25,7 @@ public class CourseBean implements Serializable {
 		return serialVersionUID;
 	}
 	
+	@Id
 	public int getCourseId() {
 		return courseId;
 	}
