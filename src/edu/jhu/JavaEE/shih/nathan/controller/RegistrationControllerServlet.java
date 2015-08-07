@@ -120,7 +120,7 @@ public class RegistrationControllerServlet extends HttpServlet {
 			message = status.getAllStatus();
 		} else {
 			try {
-				message = status.getStatus(Integer.valueOf(courseId));
+				message = status.getStatus(courseId);
 			} catch (NumberFormatException nfe) {
 				System.err.println("You must enter a number.");
 				message = "You must enter a number.";

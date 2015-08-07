@@ -18,19 +18,19 @@ public class RegistrarBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int courseId;
+	private String courseId;
 	private int numberStudentsRegistered;
-	
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	
 	@Id
-	public int getCourseId() {
+	public String getCourseId() {
 		return courseId;
 	}
 	
-	public void setCourseId(int courseId) {
+	public void setCourseId(String courseId) {
 		this.courseId = courseId;
 	}
 	
@@ -38,7 +38,11 @@ public class RegistrarBean implements Serializable {
 	public int getNumberStudentsRegistered() {
 		return numberStudentsRegistered;
 	}
-
+	
+	public void setNumberStudentsRegistered(int numberStudentsRegistered) {
+		this.numberStudentsRegistered = numberStudentsRegistered;
+	}
+	
 	public String toString() {
 		return "CourseID: " + courseId + ". Number of students registered: " + numberStudentsRegistered;
 	}

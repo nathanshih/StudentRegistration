@@ -18,7 +18,7 @@ public class CourseBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int courseId;
+	private String courseId;
 	private String courseName;
 	
 	public static long getSerialversionuid() {
@@ -26,11 +26,11 @@ public class CourseBean implements Serializable {
 	}
 	
 	@Id
-	public int getCourseId() {
+	public String getCourseId() {
 		return courseId;
 	}
 	
-	public void setCourseId(int courseId) {
+	public void setCourseId(String courseId) {
 		this.courseId = courseId;
 	}
 	
