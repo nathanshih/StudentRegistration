@@ -116,15 +116,21 @@ public class RegistrationControllerServlet extends HttpServlet {
 		String message;
 		
 		String courseId = request.getParameter("courseId");
+		
+		// validate input: make sure it is not null or empty
 		if (courseId == null || courseId.isEmpty()) {
 			message = status.getAllStatus();
 		} else {
+			
+			// validate input: make sure it is an integer
 			try {
+				Integer.parseInt(courseId);
 				message = status.getStatus(courseId);
 			} catch (NumberFormatException nfe) {
-				System.err.println("You must enter a number.");
-				message = "You must enter a number.";
-			}
+				message = "You must enter an integer.";
+				System.err.println(message);
+				nfe.printStackTrace();
+			}			
 		}
 		
 		session.setAttribute("message", message);

@@ -10,7 +10,18 @@ import javax.ejb.Local;
 @Local
 public interface StatusFacadeLocal {
 
+	/**
+	 * Get the registration status for a course.
+	 * 
+	 * @param courseId
+	 * @return
+	 */
 	public String getStatus(String courseId);
 	
+	/**
+	 * Get the registration status for all courses.
+	 * 
+	 * @return
+	 */
 	public String getAllStatus();
 }
