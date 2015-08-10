@@ -3,20 +3,22 @@ package edu.jhu.JavaEE.shih.nathan.beans;
 import java.util.List;
 
 import javax.ejb.Stateless;
-
-import edu.jhu.JavaEE.shih.nathan.dao.CourseQueryViaDataSource;
-import edu.jhu.JavaEE.shih.nathan.dao.RegistrationViaDataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceUnit;
 
 /**
  * EJB to handle course status.
  *
  * @author Nathan
  */
-@Stateless
-public class Status {
+@Stateless(mappedName = "StatusFacade")
+public class Status implements StatusFacade, StatusFacadeLocal {
 
-	private String serverUrl;
-	private String dataSourceName;
+	@PersistenceUnit(unitName="module10")
+	private EntityManagerFactory emf;
+	private EntityManager em;
 	private String result;
 	
 	public Status() {
@@ -26,26 +28,10 @@ public class Status {
 	public Status(String serverUrl, String dataSourceName) {
 		this();
 		
-		setServerUrl(serverUrl);
-		setDataSourceName(dataSourceName);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("module10");
+		em = emf.createEntityManager();
 		
 		setResult("<table><tr><th>Course ID</th><th>Course Name</th><th>Number of students registered</th></tr>");
-	}
-	
-	public String getServerUrl() {
-		return serverUrl;
-	}
-
-	public void setServerUrl(String serverUrl) {
-		this.serverUrl = serverUrl;
-	}
-
-	public String getDataSourceName() {
-		return dataSourceName;
-	}
-
-	public void setDataSourceName(String dataSourceName) {
-		this.dataSourceName = dataSourceName;
 	}
 
 	public String getResult() {
@@ -56,14 +42,13 @@ public class Status {
 		this.result = result;
 	}
 
-	public String getStatus(int courseId) {
+	public String getStatus(String courseId) {
 		
-		CourseQueryViaDataSource courseQuery = new CourseQueryViaDataSource(serverUrl, dataSourceName);
-		RegistrationViaDataSource registrarQuery = new RegistrationViaDataSource(courseId, serverUrl, dataSourceName);
-		
-		Course course = courseQuery.getCourseById(courseId);
+		CourseBean course = em.find(CourseBean.class, courseId);
 		if (course != null) {
-			int numRegisteredStudents = registrarQuery.getNumberRegisteredStudents(courseId);
+
+			RegistrarBean registrar = em.find(RegistrarBean.class, courseId);
+			int numRegisteredStudents = registrar.getNumberStudentsRegistered();
 			
 			result = result + "<tr>";
 			result = result + "<td>" + String.valueOf(course.getCourseId()) + "</td>";
@@ -75,21 +60,18 @@ public class Status {
 			result = "Course not found.";
 		}
 		
-		courseQuery.closeConnection();
-		registrarQuery.closeConnection();
-		
 		return result;
 	}
 	
 	public String getAllStatus() {
 		
-		CourseQueryViaDataSource courseQuery = new CourseQueryViaDataSource(serverUrl, dataSourceName);
-		RegistrationViaDataSource registrarQuery = new RegistrationViaDataSource(serverUrl, dataSourceName);
+		@SuppressWarnings("unchecked")
+		List<CourseBean> courses = em.createQuery("SELECT r FROM CourseBean r").getResultList();
 		
-		List<Course> courses = courseQuery.getAllCourses();
-		
-		for (Course course : courses) {
-			int numRegisteredStudents = registrarQuery.getNumberRegisteredStudents(course.getCourseId());
+		for (CourseBean course : courses) {
+			
+			RegistrarBean registrar = em.find(RegistrarBean.class, course.getCourseId());
+			int numRegisteredStudents = registrar.getNumberStudentsRegistered();
 			
 			result = result + "<tr>";
 			result = result + "<td>" + String.valueOf(course.getCourseId()) + "</td>";
@@ -98,9 +80,6 @@ public class Status {
 			result = result + "</tr>";	
 		}
 		result = result + "</table>";
-		
-		courseQuery.closeConnection();
-		registrarQuery.closeConnection();
 		
 		return result;
 	}
