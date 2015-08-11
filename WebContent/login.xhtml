@@ -43,7 +43,7 @@
 
 	<h3>Select your next action:</h3>
 
-	<h:form name="goForm">
+	<h:form name="goForm" method="post" action="RegistrationControllerServlet">
 		<input type="hidden" name="formName" value="go" />
 		<label for="course">Register for course</label>
 		<input type="radio" name="goRadio" value="course" />
@@ -57,8 +57,7 @@
 
 	<h3>For new users, please register first</h3>
 
-	<h:form name="registerForm" method="post"
-		action="RegistrationControllerServlet">
+	<h:form name="registerForm" method="post" action="RegistrationControllerServlet">
 		<input type="hidden" name="formName" value="register" />
 		<div class="button">
 			<input type="submit" name="register" value="Register" />
