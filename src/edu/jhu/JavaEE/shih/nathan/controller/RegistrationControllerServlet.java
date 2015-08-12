@@ -82,7 +82,7 @@ public class RegistrationControllerServlet extends HttpServlet {
 			if (request.getParameter("goRadio").equals("logout")) {
 				session.invalidate();
 				session = request.getSession();
-				rd = request.getRequestDispatcher("/login.jsp");
+				rd = request.getRequestDispatcher("/login.xhtml");
 			} else {
 				rd = request.getRequestDispatcher("/courses.jsp");
 			}
@@ -91,7 +91,7 @@ public class RegistrationControllerServlet extends HttpServlet {
 		} else if (formName.equals("registrarForm")) {
 			rd = request.getRequestDispatcher("RegisterCourseServlet");		
 		} else { // dispatch back to same page
-			rd = request.getRequestDispatcher("/login.jsp");
+			rd = request.getRequestDispatcher("/login.xhtml");
 		}
 		
 		// store the form so RegisterServlet knows whether it is using form A or B

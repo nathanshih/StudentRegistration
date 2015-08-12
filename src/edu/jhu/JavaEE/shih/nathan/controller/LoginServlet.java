@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.jhu.JavaEE.shih.nathan.beans.SessionBean;
 import edu.jhu.JavaEE.shih.nathan.dao.StudentLoginViaDataSource;
 
 /**
@@ -32,8 +33,7 @@ public class LoginServlet extends HttpServlet {
     	super.init(config);
     	
     	// set the loginAttemptsAllowed from the init parameter specified in web.xml
-    	String paramValue = getInitParameter("loginAttemptsAllowed");
-    	this.loginAttemptsAllowed = Integer.parseInt(paramValue);
+    	this.loginAttemptsAllowed = SessionBean.getLoginAttemptsAllowed();
     }
 	
 	public int getLoginAttemptsAllowed() {

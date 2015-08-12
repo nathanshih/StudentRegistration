@@ -80,6 +80,12 @@ public class Login implements Serializable {
 					facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome to the site, " + firstName + " " + lastName, null); 
 					// reset login attempts
 					//session.removeAttribute("loginCount");
+					session.setAttribute("userId", userId);
+					session.setAttribute("firstName", firstName);
+					session.setAttribute("lastName", lastName);
+					session.setAttribute("message", facesMessage.getSummary());
+					
+					return "welcome.jsp";
 				} else {
 					facesMessage = new FacesMessage(FacesMessage.SEVERITY_WARN, "Sorry, you don't have an account. You must register first.", null);
 				}
